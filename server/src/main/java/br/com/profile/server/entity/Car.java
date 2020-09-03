@@ -15,4 +15,10 @@ public class Car {
    public Car(String car){
       this.name = car;
    }
+
+   @Override public String toString() {
+      return "Car{" +
+              "name='" + name + '\'' +
+              '}';
+   }
 }
