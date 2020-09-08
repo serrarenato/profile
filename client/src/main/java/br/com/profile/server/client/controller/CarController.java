@@ -27,6 +27,7 @@ public class CarController {
    @RequestMapping(method = RequestMethod.GET)
    public @ResponseBody Map<String, String> getCarName() {
       Map<String, String> result;
+      log.info("Call getCarName", url);
       result = restTemplate.getForObject(url, Map.class);
       log.info(result.toString());
       return result;

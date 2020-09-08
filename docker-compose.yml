@@ -1,0 +1,48 @@
+  version: '3.3'
+
+  services:
+
+    server:
+      build:
+        context: ./server
+        dockerfile: Dockerfile
+        args:
+          IBK_PROFILE: dev
+      image: profile/server
+      ports:
+        - 8080:8080
+      environment:
+        SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE}
+      networks:
+        - test
+
+    client:
+      build:
+        context: ./client
+        dockerfile: Dockerfile
+        args:
+          IBK_PROFILE: dev
+      image: profile/client
+      ports:
+        - 8888:8888
+      environment:
+        SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE}
+      depends_on:
+        - server
+      networks:
+        - test
+
+    db:
+      image: postgres
+      restart: always
+      environment:
+        POSTGRES_PASSWORD: admin
+        POSTGRES_USER: admin
+        POSTGRES_DB: customer
+      ports:
+        - 5432:5432
+      volumes:
+        - ./database:/var/lib/postgresql/data
+  networks:
+    test:
+      driver: bridge
