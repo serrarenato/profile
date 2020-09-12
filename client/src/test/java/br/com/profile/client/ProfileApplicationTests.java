@@ -1,4 +1,4 @@
-package br.com.profile.server.client;
+package br.com.profile.client;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

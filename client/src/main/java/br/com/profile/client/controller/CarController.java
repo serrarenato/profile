@@ -1,4 +1,4 @@
-package br.com.profile.server.client.controller;
+package br.com.profile.client.controller;
 
 import java.util.Map;
 

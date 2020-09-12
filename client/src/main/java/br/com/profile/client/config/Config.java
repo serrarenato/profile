@@ -1,4 +1,4 @@
-package br.com.profile.server.client.config;
+package br.com.profile.client.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;

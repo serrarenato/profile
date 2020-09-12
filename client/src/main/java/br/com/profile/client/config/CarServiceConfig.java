@@ -1,7 +1,6 @@
-package br.com.profile.server.client.config;
+package br.com.profile.client.config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;

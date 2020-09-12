@@ -1,13 +1,23 @@
-# ===== BUILD =====
+FROM openjdk:11-jre-slim as builder
+
+# Copy jar file from target to builder image
+WORKDIR application
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+
+#Extract Jar file in builder image
+RUN java -Djarmode=layertools -jar application.jar extract
 
 
-FROM java:8
+FROM openjdk:11-jre-slim
 
-RUN mkdir -p /opt/server/work
-WORKDIR /opt/server/work
+# Copy folders to image
+WORKDIR application
+COPY --from=builder application/dependencies/ ./
+COPY --from=builder application/spring-boot-loader/ ./
+COPY --from=builder application/snapshot-dependencies/ ./
+COPY --from=builder application/application/ ./
 
-#copying module and executing
+# Start the application
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
 
-ADD /target/*.jar /opt/server/work/server.jar
-
-ENTRYPOINT [ "java", "-jar", "server.jar"]
