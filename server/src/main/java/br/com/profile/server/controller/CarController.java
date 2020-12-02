@@ -5,6 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +18,9 @@ public class CarController {
    Car car;
 
    @RequestMapping(method = RequestMethod.GET)
-   public @ResponseBody Car getCarName() {
-      log.info("Getting car name" + car.toString());
+   @PreAuthorize("hasRole('ADMIN')")
+   public @ResponseBody Car getCarName(@AuthenticationPrincipal UserDetails userDetails) {
+      log.info("Getting car name" + car.toString() + " User: " + userDetails);
       return car;
 
    }
