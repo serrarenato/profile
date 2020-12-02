@@ -56,5 +56,11 @@ This project have a actuator dependency and It can be access to URI:
 
 http://localhost:8080/actuator or http://localhost:8888/actuator
 
+## ELK
+
+ELK for storage of logs with the filebeat installed in containers to be send to Logstash 
+
+http://localhost:5601/app/kibana
+
 
 
