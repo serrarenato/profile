@@ -1,6 +1,25 @@
   version: '3.3'
 
+  volumes:
+       elk:
+
   services:
+
+    elk:
+      image: sebp/elk:623
+      ports:
+        - "5601:5601"
+        - "9200:9200"
+        - "5044:5044"
+      volumes:
+        - elk:/var/elk/data
+      ulimits:
+        nproc: 65536
+        nofile:
+          soft: 65536
+          hard: 65536
+      networks:
+        - test
 
     server:
       build:
@@ -13,6 +32,8 @@
         - 8080:8080
       environment:
         SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE}
+      depends_on:
+        - elk
       networks:
         - test
 
@@ -27,22 +48,13 @@
         - 8888:8888
       environment:
         SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE}
+
       depends_on:
         - server
+        - elk
       networks:
         - test
 
-    db:
-      image: postgres
-      restart: always
-      environment:
-        POSTGRES_PASSWORD: admin
-        POSTGRES_USER: admin
-        POSTGRES_DB: customer
-      ports:
-        - 5432:5432
-      volumes:
-        - ./database:/var/lib/postgresql/data
   networks:
     test:
       driver: bridge

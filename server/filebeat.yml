@@ -1,0 +1,27 @@
+################### Filebeat Configuration #########################
+
+filebeat:
+  # List of prospectors to fetch data.
+  prospectors:
+    -
+      paths:
+        - /var/log/jvm.log.json
+      input_type: log
+      json.message_key: rest
+      json.keys_under_root: true
+      json.overwrite_keys: true
+
+output:
+  ### Logstash as output
+  logstash:
+    # The Logstash hosts
+    hosts: ["elk:5044"]
+    ssl:
+      enabled: true
+      verification_mode: none
+
+logging:
+  to_files: true
+  files:
+    path: /var/log/filebeat.log
+    rotateeverybytes: 10485760 # = 10MB
