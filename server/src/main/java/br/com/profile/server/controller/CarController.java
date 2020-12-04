@@ -20,7 +20,7 @@ public class CarController {
    @RequestMapping(method = RequestMethod.GET)
    @PreAuthorize("hasRole('ADMIN')")
    public @ResponseBody Car getCarName(@AuthenticationPrincipal UserDetails userDetails) {
-      log.info("Getting car name" + car.toString() + " User: " + userDetails);
+      log.debug("Getting car name" + car.toString() + " User: " + userDetails);
       return car;
 
    }

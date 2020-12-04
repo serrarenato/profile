@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+### banco e logs ###
+.database/
+*.db
+logstash.*
+
+
