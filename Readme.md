@@ -2,6 +2,7 @@
 
 > This project is a test about spring profiles in Java and LoadBalancer, I tried get different scenarios with file of properties and beans configurations.
 > You must be started the client and the server projects.
+> All Microservices have a filebeat to send file's logs to ELK.
 
 tags: java profile spring
 
