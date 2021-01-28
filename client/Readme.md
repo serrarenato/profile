@@ -35,4 +35,7 @@ You will need two or more microservice server, and must be configurated in file 
 
 ```url.car.service.list: localhost:8080, localhost:8081```
 
-## 
+## Security
+The Client use the user and password to access the Server configured in file properties:
+server.user=admin
+server.password=12345
